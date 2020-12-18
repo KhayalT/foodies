@@ -42,20 +42,22 @@ Author URL: http://w3layouts.com
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mx-lg-auto">
                         <li class="{{ (Request::segment(1) == '') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('home') }}">A <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About Us <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="menu.html">Menu <span class="sr-only">(current)</span></a>
+                        <li class="{{ (Request::segment(1) == 'restaurant') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('restaurant.list') }}">Restoranlar <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="{{ (Request::segment(1) == 'restaurant') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('restaurant.list') }}">Restoranlar <span class="sr-only">(current)</span></a>
+                        @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in" style="color:green" aria-hidden="true"></i> Giriş <span class="sr-only">(current)</span></a>
                         </li>
+                        @endguest
                     </ul>
                 </div>
                 <!-- search button -->
@@ -78,8 +80,17 @@ Author URL: http://w3layouts.com
                         </div>
                         <a class="close" href="#close">×</a>
                     </div>
+
                     <!-- //search popup -->
                 </div>
+                @auth
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <li class="nav-item">
+                        <a class="nav-link"><button style="border-radius: 15px;border: 2px" class="btn btn-default"><i class="fa fa-sign-out" style="color: red" aria-hidden="true"></i> Çıxış</button> <span class="sr-only">(current)</span></a>
+                    </li>
+                </form>
+                    @endauth
                 <!-- //search button -->
             </nav>
         </div>
