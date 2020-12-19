@@ -16,10 +16,13 @@ class CreateRestaurantsTable extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('restaurant_name');
+            $table->unsignedBigInteger('user_id')->index();
             $table->string('image');
             $table->integer('price');
             $table->integer('delivery_time');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

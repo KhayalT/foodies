@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurant.list');
 
 Route::get('/search', [HomeController::class, 'search'])->name('restaurant.search');
+
+Route::get('restaurant/{id}/foods/{tag?}', [FoodController::class, 'index'])->name('food.index');
+
 
 Auth::routes(['verify' => true]);
 

@@ -227,6 +227,7 @@
 
     <!--bootstrap-->
     <script src="{{ asset('foodies/') }}/assets/js/bootstrap.min.js"></script>
+
     <!-- //bootstrap-->
     <!-- //Js scripts -->
 </body>
