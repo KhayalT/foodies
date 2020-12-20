@@ -36,4 +36,9 @@ class Restaurant extends Model
     {
         return $this->hasMany(Tag::class, 'tag_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

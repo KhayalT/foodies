@@ -21,7 +21,7 @@
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn"><i class="fa fa-filter" aria-hidden="true"></i> Filtrlə</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                  <input type="text" placeholder="Axtar.." id="myInput" onkeyup="filterFunction()">
             @foreach($tags as $tag)
                   <a href="{{ url('restaurant/' . Request::segment(2) . '/foods/' . $tag->id)}}">{{ $tag->tag }}</a>
             @endforeach
@@ -37,7 +37,9 @@
                     <div class="row menu-item">
                         <div class="col-3 p-0 position-relative">
                             <img src="{{ $food->image }}" class="img-responsive" alt="">
-                            <a href="#order" class="btn button-style button-style-2">Add</a>
+                                @auth
+                            <a href="#order" class="btn button-style button-style-2"><i class="fa fa-shopping-basket fa-2x" title="səbətə at" aria-hidden="true"></i></a>
+                                @endauth
                         </div>
                         <div class="col-9 pl-4">
                             <div class="row no-gutters">

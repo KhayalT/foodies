@@ -32,17 +32,17 @@
                             <div class="services-gd">
                                 <div class="serve-info">
                                     <h3 class="date">{{ $r->created_at->diffForHumans() }}</h3>
-                                    <a href="blog-single.html">
+                                    <a href="{{ url('restaurant/' . $r->id . '/foods/') }}">
                                         <figure>
                                             <img class="img-responsive" src="{{$r->image}}" loading='lazy' alt="blog-image">
                                         </figure>
                                     </a>
-                                    <h3> <a href="blog-single.html" class="vv-link">{{$r->restaurant_name}}</a>
+                                    <h3> <a href="{{ url('restaurant/' . $r->id . '/foods/') }}" class="vv-link">{{$r->restaurant_name}}</a>
                                     </h3>
                                     <ul class="admin-list">
                                         <li><a href="#blog"><span class="fa fa-user-circle"
                                             aria-hidden="true"></span>
-                                        Admin</a></li>
+                                        </a></li>
                                 <li><a href="#blog">
                                 {{ $r->review->count() > 0 ? round(($r->review->sum('star') / $r->review->count() ),1) : 0 }}
                                 <span class="fa fa-star" style="color:yellow" aria-hidden="true"></span> </a></li>

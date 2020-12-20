@@ -22,11 +22,15 @@ Author URL: http://w3layouts.com
           padding: 16px;
           font-size: 16px;
           border: none;
+          border: 2px;
+          border-radius: 15px;
           cursor: pointer;
+          outline: none;
         }
 
         .dropbtn:hover, .dropbtn:focus {
-          background-color: #3e8e41;
+          background-color: #59c95c;
+          outline: none;
         }
 
         #myInput {
@@ -77,7 +81,7 @@ Author URL: http://w3layouts.com
         <div class="container">
             <nav class="navbar navbar-expand-lg stroke px-0">
                 <h1>
-                    <a class="navbar-brand" href="{{ route('home') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         <i class="fa fa-cutlery" aria-hidden="true"></i> Foodies
                     </a>
                 </h1>
@@ -95,7 +99,7 @@ Author URL: http://w3layouts.com
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mx-lg-auto">
                         <li class="{{ (Request::segment(1) == '') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home') }}">A <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ url('/') }}">Ana səhifə <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About Us <span class="sr-only">(current)</span></a>
@@ -103,19 +107,31 @@ Author URL: http://w3layouts.com
                         <li class="{{ (Request::segment(1) == 'restaurant') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('restaurant.list') }}">Restoranlar <span class="sr-only">(current)</span></a>
                         </li>
+                        @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="contact.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Səbət <span class="sr-only">(current)</span></a>
                         </li>
-                        @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in" style="color:green" aria-hidden="true"></i> Giriş <span class="sr-only">(current)</span></a>
-                        </li>
-                        @endguest
+                        @endauth
+                            @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in fa-2x" style="color:green" title="Giriş" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+                            </li>
+                            @endguest
+                            @auth
+                            <form action="{{ route('logout') }}" method="POST" id="myform">
+                                @csrf
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript: submitform()" onclick="return confirm('Çıxmaq istədiyinizə əminsiniz?');">
+                                        <i class="fa fa-sign-out fa-2x" style="color: red" aria-hidden="true"></i>
+                                            <span class="sr-only">(current)</span></a>
+                                </li>
+                            </form>
+                                @endauth
                     </ul>
                 </div>
                 <!-- search button -->
                 <div class="search-right">
-                    <a href="#search" title="search"><span class="fa fa-search fa-2x" style="color:green" aria-hidden="true"></span></a>
+                    <a href="#search" title="search"><span class="fa fa-search fa-2x" aria-hidden="true"></span></a>
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
                         <div class="popup">
@@ -132,20 +148,23 @@ Author URL: http://w3layouts.com
                             </form>
                         </div>
                         <a class="close" href="#close">×</a>
+
                     </div>
 
                     <!-- //search popup -->
                 </div>
-                @auth
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <li class="nav-item">
-                        <a class="nav-link"><button style="border-radius: 15px;border: 2px" class="btn btn-default"><i class="fa fa-sign-out" style="color: red" aria-hidden="true"></i> Çıxış</button> <span class="sr-only">(current)</span></a>
-                    </li>
-                </form>
-                    @endauth
+
+
                 <!-- //search button -->
             </nav>
+
         </div>
     </header>
     <!--//header-->
+    <script type="text/javascript">
+        function submitform()
+        {
+        document.forms["myform"].submit();
+        }
+        </script>
+
